@@ -149,6 +149,12 @@ class OwnerController {
 	public String initUpdateOwnerForm() {
 		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
 	}
+	@GetMapping("/api/owners/search")
+	@ResponseBody
+	public Collection<Owner> searchOwners(
+        @RequestParam("lastName") String lastName) {
+    return owners.findByLastName(lastName);
+	}
 
 	@PostMapping("/owners/{ownerId}/edit")
 	public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") int ownerId,
